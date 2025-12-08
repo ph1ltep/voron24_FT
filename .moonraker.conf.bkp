@@ -1,0 +1,78 @@
+[server]
+host = 0.0.0.0
+port = 7125
+
+[authorization]
+cors_domains = 
+	https://my.mainsail.xyz
+	http://my.mainsail.xyz
+	http://*.local
+	http://*.lan
+trusted_clients = 
+	10.0.0.0/8
+	127.0.0.0/8
+	169.254.0.0/16
+	172.16.0.0/12
+	192.168.0.0/16
+	FE80::/10
+	::1/128
+
+[octoprint_compat]
+
+[file_manager]
+enable_object_processing = true
+
+[history]
+
+[power Lights]
+type = klipper_device
+object_name = gcode_macro _TOGGLE_LIGHTS
+locked_while_printing = false
+
+[power Shutdown on Complete]
+type = klipper_device
+object_name = gcode_macro _SHUTDOWN_AFTER_PRINT
+locked_while_printing = false
+
+[power Shutdown Power]
+type = klipper_device
+object_name = output_pin main_power
+timer = 8
+
+[power Reset Power]
+type = gpio
+pin = gpiochip0/gpio20
+locked_while_printing = true
+initial_state = on
+timer = 2
+restart_klipper_when_powered = true
+restart_delay = 2
+
+[update_manager]
+
+[update_manager mainsail]
+type = web
+repo = mainsail-crew/mainsail
+path = ~/mainsail
+
+[update_manager KlipperScreen]
+type = git_repo
+path = ~/KlipperScreen
+origin = https://github.com/KlipperScreen/KlipperScreen.git
+virtualenv = ~/.KlipperScreen-env
+requirements = scripts/KlipperScreen-requirements.txt
+system_dependencies = scripts/system-dependencies.json
+managed_services = KlipperScreen
+
+[update_manager kiauh]
+type = git_repo
+path = ~/kiauh
+origin = https://github.com/th33xitus/kiauh.git
+is_system_service = False
+
+[update_manager webcamd]
+type = git_repo
+path = ~/crowsnest
+origin = https://github.com/mainsail-crew/crowsnest.git
+primary_branch = master
+

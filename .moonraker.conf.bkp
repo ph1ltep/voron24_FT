@@ -70,3 +70,12 @@ managed_services = klipper
 primary_branch = main
 install_script = install.sh
 
+[update_manager cartographer_plugin]
+type = python
+channel = stable
+virtualenv = ~/klippy-env
+project_name = cartographer3d-plugin
+is_system_service = False
+managed_services = klipper
+info_tags = desc=Cartographer Plugin
+
